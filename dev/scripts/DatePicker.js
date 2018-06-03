@@ -16,7 +16,7 @@ class DatePicker extends React.Component {
     componentDidMount(){
         axios
           .get(
-            `https://discover.coinsquare.io/wp-json/wp/v2/posts?_embed=true&per_page=100`
+            `https://discover.coinsquare.io/wp-json/wp/v2/posts?&_embed=true&per_page=10`
           )
           .then(res => {
             const data = res.data;
@@ -29,11 +29,11 @@ class DatePicker extends React.Component {
 
     handleChange(e){
         e.preventDefault();
-        console.log("heelllllo");
+        // console.log("heelllllo");
         this.setState({
             userInput: this.datepicker.value
         });
-        console.log(this.datepicker.value);
+        // console.log(this.datepicker.value);
     }
 
     render () {
@@ -48,16 +48,16 @@ class DatePicker extends React.Component {
             return post;
         });
 
-        console.log(convertedDates, "Converted Dates");
+        // console.log(convertedDates, "Converted Dates");
 
     
         const matchDates = convertedDates.filter((post) => { 
             if (post.date === userBday){
-                return post.date;
+                return post;
             }           
         });
 
-        console.log(matchDates, "results");
+        // console.log(matchDates, "results");
         return (
             <div className="wrapper">
                 <header>
@@ -69,7 +69,7 @@ class DatePicker extends React.Component {
 
                 <section className="articles">
 
-                {this.state.newsData.map((post, i) => <div className="post" key={i}>
+                {matchDates.map((post, i) => <div className="post" key={i}>
                     <div className="top-article">
                         <div className="image-container">
                             <img src={post._embedded["wp:featuredmedia"][0].media_details.sizes.medium.source_url} alt={post._embedded["wp:featuredmedia"][0].alt_text} title={post._embedded["wp:featuredmedia"][0].alt_text} />
