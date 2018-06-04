@@ -10,7 +10,7 @@ class DatePicker extends React.Component {
     this.state = {
       newsData: [],
       userInput: "",
-    };
+    }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getDatedPosts = this.getDatedPosts.bind(this);
@@ -96,8 +96,9 @@ class DatePicker extends React.Component {
               return <Post image={imageUrl} alt={altText} title={postTitle} authorLink={authorLink} authorName={authorName} date={date} excerpt={excerpt} readMore={readMore} key={i} />;
             }) : <CoinsquarePlug />}
         </section>
-      </div>;
+      </div>
   }
 }
 
 export default DatePicker;
+

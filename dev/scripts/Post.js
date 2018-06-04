@@ -20,8 +20,7 @@ export default class Post extends React.Component{
                 </div>
         
                 <p className="article-text" dangerouslySetInnerHTML={{ __html: this.props.excerpt}}/>
-                <a href={this.props.readMore}>Read More</a>
-                {/* <p dangerouslySetInnerHTML={{ __html: post.content.rendered }}></p> */}
+                <a className="read-btn" href={this.props.readMore}>Read More</a>
             </div>
         )
     }
