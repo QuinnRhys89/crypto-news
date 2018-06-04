@@ -9,7 +9,7 @@ class DatePicker extends React.Component {
     super();
     this.state = {
       newsData: [],
-      userInput: ""
+      userInput: "",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,8 +23,7 @@ class DatePicker extends React.Component {
 
 //  function passes user birthday from input to be used as template literal in get request
   getDatedPosts(birthday){
-    // let dateSearch = "";
-
+      
     if (birthday !== "" || undefined) {
         const dateSearch = `before=${birthday}T23:59:59`;
         axios
@@ -51,8 +50,6 @@ class DatePicker extends React.Component {
     });
 
     this.getDatedPosts(this.datepicker.value);
-
-    // console.log(this.state.userInput, "Here is the input");
   }
 
   render() {
@@ -60,74 +57,46 @@ class DatePicker extends React.Component {
 
     const matchDates = this.state.newsData.filter(post => {
         if (post.date.includes(userBday)) {
-            console.log(post, "filtered post");
             return post;
         }
 
     });
 
-    console.log(matchDates, "CHECK");
-
-    console.log(matchDates, "results");
     return <div className="wrapper">
-
         <header>
           <h1>Crypto News on my Birthday</h1>
+          <p className="tagline">
+           Enter your birthday below to get exciting cryptocurrency news from that day!
+          </p>
           <form action="" className="user-input" onSubmit={this.handleSubmit}>
             <input type="date" name="user-birthday" ref={ref => (this.datepicker = ref)} />
-            <input type="submit" value="submit" />
+            <input type="submit" value="get news" />
           </form>
         </header>
 
-
         <section className="articles">
-        {matchDates.length !== 0 ?
-            matchDates.map((post, i) => {
-              
-            // Image URL
-            const imageUrl = post._embedded["wp:featuredmedia"][0].media_details.sizes.medium.source_url;
-            // Image Alt Text
-            const altText = post._embedded["wp:featuredmedia"][0].alt_text;
-            // Title
-            const postTitle = post.title.rendered;
-            // Author Name
-            const authorName = post._embedded.author[0].name;
-            // Link to Author's Profile
-            const authorLink = post._embedded.author[0].link;
-            // Post Date
-            const date = post.date;
-            // Post Excerpt
-            const excerpt = post.excerpt.rendered;
-            // Read More Link
-            const readMore = post.link;
+          {matchDates.length !== 0 ? matchDates.map((post, i) => {
+              // Image URL
+              const imageUrl = post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url;
+              // Image Alt Text
+              const altText = post._embedded["wp:featuredmedia"][0].alt_text;
+              // Title
+              const postTitle = post.title.rendered;
+              // Author Name
+              const authorName = post._embedded.author[0].name;
+              // Link to Author's Profile
+              const authorLink = post._embedded.author[0].link;
+              // Post Date
+              const date = post.date;
+              // Post Excerpt
+              const excerpt = post.excerpt.rendered;
+              // Read More Link
+              const readMore = post.link;
 
-            return (
-
-                <Post
-                image={imageUrl}
-                alt={altText}
-                title={postTitle}
-                authorLink={authorLink}
-                authorName={authorName}
-                date={date}
-                excerpt={excerpt}
-                readMore={readMore}
-                key={i}
-                />
-            )
-
-          })
-          :
-              <CoinsquarePlug/>
-        }
-
-
-
-              
-
-        
+              return <Post image={imageUrl} alt={altText} title={postTitle} authorLink={authorLink} authorName={authorName} date={date} excerpt={excerpt} readMore={readMore} key={i} />;
+            }) : <CoinsquarePlug />}
         </section>
-      </div>
+      </div>;
   }
 }
 

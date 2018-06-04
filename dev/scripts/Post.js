@@ -8,7 +8,7 @@ export default class Post extends React.Component{
             <div className="post">
                 <div className="top-article">
                     <div className="image-container">
-                        <img src={this.props.image} alt={this.props.alt} title={this.props.alt}/>
+                        <a href={this.props.readMore}><img className="post-image" src={this.props.image} alt={this.props.alt} title={this.props.alt}/></a>
                     </div>
                 </div>
         
