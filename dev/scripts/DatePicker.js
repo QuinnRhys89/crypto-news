@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Post from './Post.js';
 
 class DatePicker extends React.Component {
   constructor() {
@@ -27,7 +28,7 @@ class DatePicker extends React.Component {
         const dateSearch = `before=${birthday}T23:59:59`;
         axios
             .get(
-                `https://discover.coinsquare.io/wp-json/wp/v2/posts?${dateSearch}&_embed=true&per_page=10`
+                `https://discover.coinsquare.io/wp-json/wp/v2/posts?${dateSearch}&_embed=true&per_page=5`
             )
             .then(res => {
                 const data = res.data;
@@ -58,67 +59,69 @@ class DatePicker extends React.Component {
 
     const matchDates = this.state.newsData.filter(post => {
         if (post.date.includes(userBday)) {
-        return post;
+            return post;
       }
 
     });
 
-    console.log(matchDates);
+    console.log(matchDates, "CHECK");
 
     // console.log(matchDates, "results");
-    return (
-      <div className="wrapper">
+    return <div className="wrapper">
+
         <header>
           <h1>Crypto News on my Birthday</h1>
-                <form action="" className="user-input" onSubmit={this.handleSubmit}>
-            <input
-              type="date"
-              name="user-birthday"
-              ref={ref => (this.datepicker = ref)}
-            />
-            <input type="submit" value="submit"/>
+          <form action="" className="user-input" onSubmit={this.handleSubmit}>
+            <input type="date" name="user-birthday" ref={ref => (this.datepicker = ref)} />
+            <input type="submit" value="submit" />
           </form>
         </header>
 
         <section className="articles">
-          {matchDates.map((post, i) => (
-            <div className="post" key={i}>
-              <div className="top-article">
-                <div className="image-container">
-                  <img
-                    src={
-                      post._embedded["wp:featuredmedia"][0].media_details.sizes
-                        .medium.source_url
-                    }
-                    alt={post._embedded["wp:featuredmedia"][0].alt_text}
-                    title={post._embedded["wp:featuredmedia"][0].alt_text}
-                  />
-                </div>
-              </div>
+          {matchDates.map((post, i) => {
+              
+            // Image URL
+            const imageUrl = post._embedded["wp:featuredmedia"][0].media_details.sizes.medium.source_url;
+            // Image Alt Text
+            const altText = post._embedded["wp:featuredmedia"][0].alt_text;
+            // Title
+            const postTitle = post.title.rendered;
+            // Author Name
+            const authorName = post._embedded.author[0].name;
+            // Link to Author's Profile
+            const authorLink = post._embedded.author[0].link;
+            // Post Date
+            const date = post.date;
+            // Post Excerpt
+            const excerpt = post.excerpt.rendered;
+            // Read More Link
+            const readMore = post.link;
 
-              <h2 dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+            
+            if (post){
+                console.log(post, "posts");
+                return (
+                    <Post
+                    image={imageUrl}
+                    alt={altText}
+                    title={postTitle}
+                    authorLink={authorLink}
+                    authorName={authorName}
+                    date={date}
+                    excerpt={excerpt}
+                    readMore={readMore}
+                    key={i}
+                    />
+                )
+            }
+            else if (post === null){
+                return
+                    <p>HELLO</p>
+            }
 
-              <div className="post-metadata">
-                <p>
-                  By:{" "}
-                  <a href={post._embedded.author[0].link}>
-                    {post._embedded.author[0].name}
-                  </a>
-                </p>
-                <p>/ {post.date}</p>
-              </div>
-
-              <p
-                className="article-text"
-                dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-              />
-              <a href={post.link}>Read More</a>
-              {/* <p dangerouslySetInnerHTML={{ __html: post.content.rendered }}></p> */}
-            </div>
-          ))}
+          })}
         </section>
       </div>
-    );
   }
 }
 
