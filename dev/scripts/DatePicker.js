@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Post from './Post.js';
+import CoinsquarePlug from './CoinsquarePlug'
 
 class DatePicker extends React.Component {
   constructor() {
@@ -39,7 +40,7 @@ class DatePicker extends React.Component {
             });
     }
     else {
-        return null;
+        return;
     }
 }
   
@@ -51,7 +52,7 @@ class DatePicker extends React.Component {
 
     this.getDatedPosts(this.datepicker.value);
 
-    console.log(this.state.userInput, "Here is the input");
+    // console.log(this.state.userInput, "Here is the input");
   }
 
   render() {
@@ -59,14 +60,15 @@ class DatePicker extends React.Component {
 
     const matchDates = this.state.newsData.filter(post => {
         if (post.date.includes(userBday)) {
+            console.log(post, "filtered post");
             return post;
-      }
+        }
 
     });
 
     console.log(matchDates, "CHECK");
 
-    // console.log(matchDates, "results");
+    console.log(matchDates, "results");
     return <div className="wrapper">
 
         <header>
@@ -77,8 +79,10 @@ class DatePicker extends React.Component {
           </form>
         </header>
 
+
         <section className="articles">
-          {matchDates.map((post, i) => {
+        {matchDates.length !== 0 ?
+            matchDates.map((post, i) => {
               
             // Image URL
             const imageUrl = post._embedded["wp:featuredmedia"][0].media_details.sizes.medium.source_url;
@@ -97,29 +101,31 @@ class DatePicker extends React.Component {
             // Read More Link
             const readMore = post.link;
 
-            
-            if (post){
-                console.log(post, "posts");
-                return (
-                    <Post
-                    image={imageUrl}
-                    alt={altText}
-                    title={postTitle}
-                    authorLink={authorLink}
-                    authorName={authorName}
-                    date={date}
-                    excerpt={excerpt}
-                    readMore={readMore}
-                    key={i}
-                    />
-                )
-            }
-            else if (post === null){
-                return
-                    <p>HELLO</p>
-            }
+            return (
 
-          })}
+                <Post
+                image={imageUrl}
+                alt={altText}
+                title={postTitle}
+                authorLink={authorLink}
+                authorName={authorName}
+                date={date}
+                excerpt={excerpt}
+                readMore={readMore}
+                key={i}
+                />
+            )
+
+          })
+          :
+              <CoinsquarePlug/>
+        }
+
+
+
+              
+
+        
         </section>
       </div>
   }
