@@ -1,27 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-
-export default class Post extends React.Component{
-    render() {
-        return(
-            <div className="post">
-                <div className="top-article">
-                    <div className="image-container">
-                        <a href={this.props.readMore}><img className="post-image" src={this.props.image} alt={this.props.alt} title={this.props.alt}/></a>
-                    </div>
-                </div>
-        
-                <h2 dangerouslySetInnerHTML={{ __html: this.props.title}} />
-        
-                <div className="post-metadata">
-                    <p>By: <a href={this.props.authorLink}>{this.props.authorName}</a></p>
-                    <p>/ {this.props.date}</p>
-                </div>
-        
-                <p className="article-text" dangerouslySetInnerHTML={{ __html: this.props.excerpt}}/>
-                <a className="read-btn" href={this.props.readMore}>Read More</a>
+const Post = (props) => {
+    return (<div className="post">
+        <div className="top-article">
+            <div className="image-container">
+                <a href={props.readMore} target="_blank"><img className="post-image" src={props.image} alt={props.alt}/></a>
             </div>
-        )
-    }
+        </div>
+
+        <h2 dangerouslySetInnerHTML={{ __html: props.title}} />
+
+        <div className="post-metadata">
+            <span>By <a href={props.authorLink}>{props.authorName}</a></span>
+            <span>| {props.date}</span>
+        </div>
+
+        <p className="article-text" dangerouslySetInnerHTML={{ __html: props.excerpt}}/>
+        <a className="read-btn" href={props.readMore} target="_blank">Read More</a>
+    </div>
+    )
 }
+
+export default Post;

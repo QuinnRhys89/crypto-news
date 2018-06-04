@@ -15,18 +15,17 @@
 
 
 .post-metadata{
-    display: flex;
     p{
         margin-top: 0;
     }
 }
 
-.post-metadata p:first-child{
-    padding-right: 10px;
+.post-metadata span:first-child{
+    padding-right: 2px;
 }
 
-.post-metadata:last-child{
-    padding-left: 10px;
+.post-metadata span:last-child{
+    padding-left: 2px;
 }
 
 

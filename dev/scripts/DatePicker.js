@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Post from './Post.js';
-import CoinsquarePlug from './CoinsquarePlug'
+import Heading from "./Heading.js";
+import CoinsquarePlug from './CoinsquarePlug';
 
 class DatePicker extends React.Component {
   constructor() {
@@ -64,10 +65,7 @@ class DatePicker extends React.Component {
 
     return <div className="wrapper">
         <header>
-          <h1>Crypto News on my Birthday</h1>
-          <p className="tagline">
-           Enter your birthday below to get exciting cryptocurrency news from that day!
-          </p>
+          <Heading />
           <form action="" className="user-input" onSubmit={this.handleSubmit}>
             <input type="date" name="user-birthday" ref={ref => (this.datepicker = ref)} />
             <input type="submit" value="get news" />
@@ -88,12 +86,13 @@ class DatePicker extends React.Component {
               const authorLink = post._embedded.author[0].link;
               // Post Date
               const date = post.date;
+              const dateConverted = new Date(post.date).toDateString();
               // Post Excerpt
               const excerpt = post.excerpt.rendered;
               // Read More Link
               const readMore = post.link;
 
-              return <Post image={imageUrl} alt={altText} title={postTitle} authorLink={authorLink} authorName={authorName} date={date} excerpt={excerpt} readMore={readMore} key={i} />;
+              return <Post image={imageUrl} alt={altText} title={postTitle} authorLink={authorLink} authorName={authorName} date={dateConverted} excerpt={excerpt} readMore={readMore} key={i} />;
             }) : <CoinsquarePlug />}
         </section>
       </div>
