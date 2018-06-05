@@ -22,7 +22,6 @@ class DatePicker extends React.Component {
 componentDidMount(){
 // pass an empty string to getDatedPosts in order to prevent status error
     this.getDatedPosts("");
-    this.datepicker.value = "2018-06-03";
 }
 
 //  function passes user birthday from input to be used as template literal in get request
