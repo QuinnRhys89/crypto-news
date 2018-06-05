@@ -9,6 +9,8 @@ $headerfont: 'Merriweather', serif;
 @import "components/posts";
 @import "components/header";
 @import "components/responsive";
+@import "components/coinsquare-plug";
+@import "components/footer";
 
 body{
     margin: 0;
@@ -20,7 +22,7 @@ body{
 }
 
 .wrapper{
-    margin: 100px auto;
+    margin: 0 auto;
     max-width: 1180px;
     width: 90%;
 }
