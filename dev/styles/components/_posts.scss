@@ -17,6 +17,13 @@
 .post-metadata{
     span{
         margin-top: 0;
+        a{
+            color: $maincolor;
+            padding-bottom: 2px;
+            &:hover{
+                border-bottom: 2px solid $maincolor;
+            }
+        }
     }
 }
 

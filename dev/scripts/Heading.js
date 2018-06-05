@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 const Heading = (props) => {
     return(
-        <div>
+        <div className="wrapper">
             <h1>Crypto News on my Birthday</h1>
             <p className="tagline">
                 Enter your birthday below to get exciting cryptocurrency news from that day!

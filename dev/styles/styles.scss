@@ -8,9 +8,9 @@ $headerfont: 'Merriweather', serif;
 @import "components/setup";
 @import "components/posts";
 @import "components/header";
-@import "components/responsive";
 @import "components/coinsquare-plug";
 @import "components/footer";
+@import "components/responsive";
 
 body{
     margin: 0;
@@ -29,7 +29,7 @@ body{
 
 a {
     text-decoration: none;
-    color:  #4f66ff;
+    color: $maincolor;
 }
 
 img{
@@ -40,9 +40,6 @@ img{
     }
 }
 
-// a:hover{
-//     color: #72abff
-// }
 
 
 

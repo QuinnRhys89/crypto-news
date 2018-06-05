@@ -1,0 +1,60 @@
+@media (max-width: 940px) {
+    header{
+        h1{
+            font-size: 2.9rem;
+        }
+        .tagline{
+            font-size: 1rem;
+        }
+    }
+
+    // header
+
+   
+ 
+}
+
+@media (max-width: 768px) {
+    header{
+        h1{
+            font-size: 2.5rem;
+        }
+        .tagline{
+            margin-bottom: 40px;
+        }
+    }
+
+    .articles{
+        .post{
+            width: 100%;
+        }
+    }
+ 
+}
+
+
+@media (max-width: 480px) {
+    header{
+        padding-bottom: 50px;
+        h1{
+            font-size: 2.5rem;
+        }
+    }
+
+    h2{
+        font-size: 1.2rem;
+    }
+
+    .user-input{
+        flex-direction: column;
+    }
+
+    input{
+        width: 80%;
+    }
+
+    input[type=name]{
+        padding-left: 20px;
+    }
+ 
+}

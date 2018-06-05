@@ -22,7 +22,10 @@ header{
 
 .user-input{
     text-align: center;
-    margin-top: 40px;  
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     input[type=date]{
         border: 2px solid $maincolor;
         padding: 20px 40px;
@@ -33,7 +36,7 @@ header{
 
 input[type=submit]{
     border: 2px solid $maincolor;
-    padding: 21px 40px;
+    padding: 20px 40px;
     text-transform: uppercase;
     background: $maincolor;
     color: $backgroundcolor;
@@ -42,6 +45,10 @@ input[type=submit]{
         background: $hovercolor;
         border-color: $hovercolor;
     }
+}
+
+input{
+    height: 60px;
 }
 
 
