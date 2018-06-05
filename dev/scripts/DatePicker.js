@@ -35,10 +35,11 @@ getDatedPosts(birthday){
             )
             .then(res => {
                 const data = res.data;
-                console.log(data, "Submitted");
                 this.setState({
                     newsData: data
                 });
+            }).catch(error => {
+                console.log(error.response);
             });
     }
     else {
@@ -66,50 +67,42 @@ handleSubmit(e) {
         }
     });
 
-    return (
-        <div className="content-container">
-            <div>
-                <header>
-                    <Heading />
-                    <form action="" className="user-input" onSubmit={this.handleSubmit}>
-                        <input type="date" name="user-birthday" ref={ref => (this.datepicker = ref)} />
-                        <input type="submit" value="get news" />
-                    </form>
-                </header>
-        
-                <section className="articles wrapper">
+    return <div className="content-container">
+        <div>
+          <header>
+            <Heading />
+            <form action="" className="user-input" onSubmit={this.handleSubmit}>
+              <input type="date" name="user-birthday" ref={ref => (this.datepicker = ref)} />
+              <input type="submit" value="get news" />
+            </form>
+          </header>
 
-                    {matchDates.length !== 0 ? matchDates.map((post, i) => {
-                    // Image URL
-                    const imageUrl = post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url;
-                    // Image Alt Text
-                    const altText = post._embedded["wp:featuredmedia"][0].alt_text;
-                    // Title
-                    const postTitle = post.title.rendered;
-                    // Author Name
-                    const authorName = post._embedded.author[0].name;
-                    // Link to Author's Profile
-                    const authorLink = post._embedded.author[0].link;
-                    // Post Date
-                    const date = post.date;
-                    const dateConverted = new Date(post.date).toDateString();
-                    // Post Excerpt
-                    const excerpt = post.excerpt.rendered;
-                    // Read More Link
-                    const readMore = post.link;
-        
-                    return <Post image={imageUrl} alt={altText} title={postTitle} authorLink={authorLink} authorName={authorName} date={dateConverted} excerpt={excerpt} readMore={readMore} key={i} />
-                    }) :
-                    
-                    <CoinsquarePlug />
-                    }
-                </section>
-        
-            </div>
-            <Footer/>
+          <section className="articles wrapper">
+            {matchDates.length !== 0 ? matchDates.map((post, i) => {
+                // Image URL
+                const imageUrl = post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url;
+                // Image Alt Text
+                const altText = post._embedded["wp:featuredmedia"][0].alt_text;
+                // Title
+                const postTitle = post.title.rendered;
+                // Author Name
+                const authorName = post._embedded.author[0].name;
+                // Link to Author's Profile
+                const authorLink = post._embedded.author[0].link;
+                // Post Date
+                const date = post.date;
+                const dateConverted = new Date(post.date).toDateString();
+                // Post Excerpt
+                const excerpt = post.excerpt.rendered;
+                // Read More Link
+                const readMore = post.link;
+
+                return <Post image={imageUrl} alt={altText} title={postTitle} authorLink={authorLink} authorName={authorName} date={dateConverted} excerpt={excerpt} readMore={readMore} key={i} />;
+              }) : <CoinsquarePlug />}
+          </section>
         </div>
-
-    )
+        <Footer />
+      </div>;
   }
 }
 
