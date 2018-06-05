@@ -7,3 +7,12 @@
         margin: 10px 0;
     }
 }
+
+.website-link{
+    color: $hovercolor;
+    border-bottom: 2px solid $hovercolor;
+    &:hover{
+        color: $maincolor;
+        border-color: $maincolor;
+    }
+}

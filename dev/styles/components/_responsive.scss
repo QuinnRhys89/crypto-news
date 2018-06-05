@@ -5,13 +5,9 @@
         }
         .tagline{
             font-size: 1rem;
+            margin-bottom: 40px;
         }
-    }
-
-    // header
-
-   
- 
+    } 
 }
 
 @media (max-width: 768px) {
@@ -29,7 +25,15 @@
             width: 100%;
         }
     }
- 
+
+    .coinsquare-plug{
+        p{
+            font-size: 1rem;
+            margin-top: 15px;
+            line-height:1.8rem;
+        }
+    }
+
 }
 
 
@@ -38,6 +42,10 @@
         padding-bottom: 50px;
         h1{
             font-size: 2.5rem;
+        }
+        .tagline{
+            margin: 20px auto;
+            width: 80%;
         }
     }
 
@@ -55,6 +63,5 @@
 
     input[type=name]{
         padding-left: 20px;
-    }
- 
+    } 
 }
